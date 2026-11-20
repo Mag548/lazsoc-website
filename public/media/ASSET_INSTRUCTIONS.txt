@@ -1,0 +1,4 @@
+Place your original photographed atrium as laz-hero.jpg here.
+Place your optimized short campus video as laz-tour.mp4 here.
+Neither binary asset was available inside this code workspace.
+The demo uses local SVG fallback illustrations until they are supplied.

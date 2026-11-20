@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#1e394a"/><stop offset=".55" stop-color="#456477"/><stop offset="1" stop-color="#9d9b86"/></linearGradient><linearGradient id="light" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#cce1de"/><stop offset="1" stop-color="#5f8191"/></linearGradient></defs><rect width="1600" height="900" fill="url(#bg)"/>
+<path d="M0 0H1600V400L1200 570 270 470 0 330Z" fill="url(#light)"/>
+<g stroke="#274758" stroke-width="7" opacity=".55" fill="none">
+<path d="M-1450 -60L-830 550 M-900 -60L-1490 550"/>
+<path d="M-1325 -60L-705 550 M-775 -60L-1365 550"/>
+<path d="M-1200 -60L-580 550 M-650 -60L-1240 550"/>
+<path d="M-1075 -60L-455 550 M-525 -60L-1115 550"/>
+<path d="M-950 -60L-330 550 M-400 -60L-990 550"/>
+<path d="M-825 -60L-205 550 M-275 -60L-865 550"/>
+<path d="M-700 -60L-80 550 M-150 -60L-740 550"/>
+<path d="M-575 -60L45 550 M-25 -60L-615 550"/>
+<path d="M-450 -60L170 550 M100 -60L-490 550"/>
+<path d="M-325 -60L295 550 M225 -60L-365 550"/>
+<path d="M-200 -60L420 550 M350 -60L-240 550"/>
+<path d="M-75 -60L545 550 M475 -60L-115 550"/>
+<path d="M50 -60L670 550 M600 -60L10 550"/>
+<path d="M175 -60L795 550 M725 -60L135 550"/>
+<path d="M300 -60L920 550 M850 -60L260 550"/>
+<path d="M425 -60L1045 550 M975 -60L385 550"/>
+<path d="M550 -60L1170 550 M1100 -60L510 550"/>
+<path d="M675 -60L1295 550 M1225 -60L635 550"/>
+<path d="M800 -60L1420 550 M1350 -60L760 550"/>
+<path d="M925 -60L1545 550 M1475 -60L885 550"/>
+<path d="M1050 -60L1670 550 M1600 -60L1010 550"/>
+<path d="M1175 -60L1795 550 M1725 -60L1135 550"/>
+<path d="M1300 -60L1920 550 M1850 -60L1260 550"/>
+<path d="M1425 -60L2045 550 M1975 -60L1385 550"/>
+<path d="M1550 -60L2170 550 M2100 -60L1510 550"/>
+<path d="M1675 -60L2295 550 M2225 -60L1635 550"/>
+<path d="M1800 -60L2420 550 M2350 -60L1760 550"/>
+<path d="M1925 -60L2545 550 M2475 -60L1885 550"/>
+<path d="M2050 -60L2670 550 M2600 -60L2010 550"/>
+<path d="M2175 -60L2795 550 M2725 -60L2135 550"/>
+</g><path d="M0 355 290 470 460 900H0Z" fill="#546f76"/><path d="M1600 398 1200 562 1080 900H1600Z" fill="#9e9b82"/><path d="M0 710 710 543 1600 747V900H0Z" fill="#8d9792"/>
+<path d="M0 760 720 584 1600 792" fill="none" stroke="#d8dace" stroke-width="26"/>
+<path d="M0 810 720 626 1600 835" fill="none" stroke="#334d58" stroke-width="10"/>
+<rect width="1600" height="900" fill="#071421" opacity=".22"/></svg>
