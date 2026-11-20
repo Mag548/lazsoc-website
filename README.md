@@ -1,88 +1,83 @@
 # LazSoc — cinematic website concept
 
-A working, editable **React + Vite + GSAP + Lenis** first version of a premium LazSoc landing page. Inspired by Awwwards-level editorial direction and motion, but with an original composition.
+A working **React 19 + Vite + GSAP + Lenis** prototype of a one-page LazSoc site. Scroll drives the page: the Lazaridis Hall roof is drawn over a real photograph, a maple leaf falls through a pinned hero, and a film chapter seeks campus footage from scroll position. There is no backend, router, or CMS. This is a concept prototype, not an approved official LazSoc deployment.
 
-## Open in Codex / VS Code
+Repository: https://github.com/Mag548/lazsoc-website
 
-1. Download and unzip `lazsoc-codex-starter.zip`.
-2. Open the unzipped `lazsoc-prototype` folder in **Codex**, VS Code, or your terminal. If using Codex with GitHub, first push this folder to a repository, then select that repository in Codex.
-3. In the project terminal run:
+## Run it
 
 ```bash
+git clone https://github.com/Mag548/lazsoc-website.git
+cd lazsoc-website
 npm install
 npm run dev
 ```
 
-4. Open the local URL Vite prints (normally `http://localhost:5173`).
-5. For a production compile run `npm run build`; the static site will appear in `dist/`. Deploy this directory to Vercel or Netlify.
+Open the local URL Vite prints (normally `http://localhost:5173`).
+
+```bash
+npm run build    # static site in dist/
+npm run preview  # serve that build locally
+```
+
+`dist/` can be deployed to Vercel or Netlify. `node_modules/` and `dist/` are gitignored.
 
 ## What works now
 
-- Intro animation: ceiling lattice SVG paths are drawn sequentially with GSAP on page load.
-- Scroll-driven leaf: a golden maple leaf drifts, rotates and descends as the user scrolls through a pinned hero. Reverses as scrolling reverses.
-- Editorial, responsive sections: About, Experience, Community and footer.
-- Scroll-scrub film chapter: place a real MP4 in the expected path and the scroll controls playback frame position; otherwise a designed background animates as a fallback.
-- Smooth scrolling on desktop with Lenis (disabled on mobile and reduced-motion preferences).
-- Accessible navigation, semantic markup and reduced motion support.
+- Hero photo at `public/media/laz-hero.jpg`. If that file fails to load, the page falls back to `public/media/hero-fallback.svg`.
+- Roof drawing: SVG paths in `src/data/roofSketch.js` are drawn on load with GSAP DrawSVG, aligned to the photograph and positioned with the same cover crop as the image.
+- Scroll-driven leaf: `public/media/laz-leaf.png` drifts, rotates, and scales with scroll, and reverses when scrolling back up. It is hidden when reduced motion is on.
+- Pinned hero and film chapters. The film seeks `public/media/laz-tour.mp4` from scroll progress. That video is not in the repo yet; without it, a designed still stays in place. Nothing autoplays.
+- Editorial sections: About, Get involved, Shop, and Resources, plus a closing invitation that links to [lazsoc.ca](https://lazsoc.ca/).
+- Desktop wheel smoothing with one Lenis instance, synced to the GSAP ticker. Lenis is off below 768px and when `prefers-reduced-motion` is set.
+- Semantic markup, a keyboard-reachable nav, and a mobile menu.
 
-## IMPORTANT: Put your original photo into the project
+## Add the campus film
 
-Your image shared in chat did **not** arrive as a locally accessible image file in this environment, so the project uses an original **local SVG concept illustration** until you add it.
-
-To use your exact uploaded photo:
-
-1. Name your image `laz-hero.jpg` (if it is PNG, convert to JPG or change the source path in `src/components/Hero.jsx`).
-2. Put it in `public/media/laz-hero.jpg`.
-3. Refresh the site. The `<img>` in `src/components/Hero.jsx` will automatically use it.
-4. Adjust the drawing paths in `src/components/RoofTrace.jsx` to precisely follow the roof beams. This prototype uses a perspective-lattice *approximation*; pixel-accurate tracing requires the final image's original dimensions.
-
-## Add the cinematic footage
-
-Export a **silent, short** 8–20-second 1080p or 720p video; name it `laz-tour.mp4` and put it in `public/media/laz-tour.mp4`.
-
-For smooth seeking, H.264 with a short keyframe interval is recommended. For example (edit file names as needed):
+Export a silent 8–20 second 1080p or 720p video as `public/media/laz-tour.mp4`. Short keyframe intervals make scroll seeking smoother:
 
 ```bash
 ffmpeg -i source.mp4 -an -vf "scale=1280:-2,fps=30" -c:v libx264 -crf 21 -preset medium -pix_fmt yuv420p -g 8 -keyint_min 8 -sc_threshold 0 -movflags +faststart public/media/laz-tour.mp4
 ```
 
-The source can be a walkthrough, shoot that moves from the glass ceiling toward the atrium, or an edited campus montage. For demanding mobile devices, a pre-extracted WebP/JPEG image-sequence solution may perform better than arbitrary MP4 seeking.
+A walkthrough from the glass ceiling into the atrium, or a short campus montage, both fit the chapter. On low-powered phones, a WebP or JPEG frame sequence can seek more reliably than an MP4.
 
-## Layout / code structure
+## Layout
 
 ```text
 src/
-  App.jsx                      Main page, section structure, Lenis setup
-  main.jsx                     React entry point
-  styles.css                   Typography, styles, responsive rules
+  App.jsx                      Page sections and Lenis setup
+  main.jsx                     React entry
+  styles.css                   Layout, type, and responsive rules
+  data/roofSketch.js           Roof paths traced to the hero photo
   components/
-    Header.jsx                 Navbar + mobile menu
-    Hero.jsx                   Pinned hero / falling leaf
-    RoofTrace.jsx              SVG path drawing on boot
-    MapleLeaf.jsx              Custom vector leaf
-    FilmChapter.jsx            Video scroll-scrubbing + visual fallback
-    Reveal.jsx                 Scroll-triggered section entrances
+    Header.jsx                 Nav and mobile menu
+    Hero.jsx                   Pinned hero and photo crop
+    RoofTrace.jsx              SVG roof draw on load
+    FallingLeaf.jsx            Scroll-scrubbed leaf
+    MapleLeaf.jsx              Unused vector leaf
+    FilmChapter.jsx            Scroll-scrubbed video and still fallback
+    Reveal.jsx                 Section entrance motion
 public/
   favicon.svg
   media/
-    hero-fallback.svg          Local architectural illustration
-    film-poster.svg            Fallback visual for film chapter
-    laz-hero.jpg               ADD YOUR ORIGINAL PHOTO HERE
-    laz-tour.mp4               ADD YOUR VIDEO HERE
-
+    laz-hero.jpg               Hero photograph
+    laz-leaf.png               Falling leaf
+    hero-fallback.svg          Used if the hero photo fails
+    film-poster.svg            Film-chapter still
+    laz-tour.mp4               Add the campus video here
 docs/
-  creative-plan.md            Full creative direction + phased roadmap
-  CODEX_PROMPTS.md            Next-step prompts for Codex
+  creative-plan.md             Direction and phased roadmap
+  CODEX_PROMPTS.md             Follow-up build prompts
 ```
 
-## Production checklist
+Stack details: plain CSS (no UI library), JavaScript rather than TypeScript, GSAP ScrollTrigger for pins and scrubbing, and DrawSVG for the roof. `motion` is installed and unused. Fonts are Manrope and DM Sans from Google Fonts. The wordmark and leaf are concept marks.
 
-- Replace prototype illustration and video with **cleared-for-use** LazSoc/Laurier media.
-- Match roof SVG paths to the final image (do not assume current SVG geometry is pixel-accurate).
-- Verify club brand/logo styles with the LazSoc team; current wordmark is a concept mark.
-- Add CMS or data source for real events, teams and clubs.
-- Compress images, encode video for seeking, consider CDN delivery and test mobile Safari.
-- Keyboard/contrast audit, Lighthouse tests, and QA across devices.
-- Use relative links for actual pages once a routing strategy is chosen.
+## Still to do
 
-This is a *working prototype*, not an approved official LazSoc deployment.
+- Add cleared campus footage at `public/media/laz-tour.mp4`.
+- Confirm the roof paths in `src/data/roofSketch.js` against the final crop at phone, tablet, and desktop widths.
+- Confirm brand and logo use with LazSoc before any public launch.
+- Replace conceptual copy with approved club, event, and team content. Do not invent dates, statistics, sponsors, or approvals.
+- Add a content source once real events, teams, and clubs need to be edited outside the code.
+- Run a keyboard, contrast, Lighthouse, and mobile Safari pass, and compress media before launch.
